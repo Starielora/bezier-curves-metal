@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="MN5-5Q-yBA">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="Oju-mu-oRs">
+            <objects>
+                <windowController id="MN5-5Q-yBA" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Fv2-JV-XPi">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="425" y="462" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+                        <view key="contentView" id="s6r-j3-vPN">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="MN5-5Q-yBA" id="1um-3T-C1M"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="wU9-Pi-35O" kind="relationship" relationship="window.shadowedContentViewController" id="amd-Dk-mbR"/>
+                    </connections>
+                </windowController>
+                <customObject id="t5I-A2-DaL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="ahT-o4-jLT" customClass="AppDelegate" customModule="Bezier3D" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-238" y="-1399"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="or3-K9-S2I">
+            <objects>
+                <viewController id="wU9-Pi-35O" customClass="ViewController" customModule="Bezier3D" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="tBg-2K-6An" customClass="MTKView">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="vPJ-AO-Nf2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-238" y="-988"/>
+        </scene>
+    </scenes>
+</document>

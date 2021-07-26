@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26889ACA26AF4FB40001FF6C /* Bezier3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889AB726AF4FB40001FF6C /* Bezier3DApp.swift */; };
-		26889ACB26AF4FB40001FF6C /* Bezier3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889AB726AF4FB40001FF6C /* Bezier3DApp.swift */; };
-		26889ACC26AF4FB40001FF6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889AB826AF4FB40001FF6C /* ContentView.swift */; };
-		26889ACD26AF4FB40001FF6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889AB826AF4FB40001FF6C /* ContentView.swift */; };
 		26889ACE26AF4FB40001FF6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26889AB926AF4FB40001FF6C /* Assets.xcassets */; };
 		26889ACF26AF4FB40001FF6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26889AB926AF4FB40001FF6C /* Assets.xcassets */; };
+		26889AD926AF52150001FF6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26889AD826AF52150001FF6C /* Main.storyboard */; };
+		26889ADD26AF5AF60001FF6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889ADC26AF5AF60001FF6C /* ViewController.swift */; };
+		26889ADE26AF5AF60001FF6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889ADC26AF5AF60001FF6C /* ViewController.swift */; };
+		26889AE026AF5E6E0001FF6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889ADF26AF5E6E0001FF6C /* AppDelegate.swift */; };
+		26889AE126AF5E6E0001FF6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889ADF26AF5E6E0001FF6C /* AppDelegate.swift */; };
+		26889AE326AF5FB00001FF6C /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889AE226AF5FB00001FF6C /* Renderer.swift */; };
+		26889AE426AF5FB00001FF6C /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26889AE226AF5FB00001FF6C /* Renderer.swift */; };
+		26889AE626AF63390001FF6C /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 26889AE526AF63390001FF6C /* Shaders.metal */; };
+		26889AE726AF63390001FF6C /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 26889AE526AF63390001FF6C /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		26889AB726AF4FB40001FF6C /* Bezier3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bezier3DApp.swift; sourceTree = "<group>"; };
-		26889AB826AF4FB40001FF6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		26889AB926AF4FB40001FF6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26889ABE26AF4FB40001FF6C /* Bezier3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bezier3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26889AC126AF4FB40001FF6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26889AC626AF4FB40001FF6C /* Bezier3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bezier3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26889AC826AF4FB40001FF6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26889AC926AF4FB40001FF6C /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		26889AD826AF52150001FF6C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		26889ADC26AF5AF60001FF6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		26889ADF26AF5E6E0001FF6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		26889AE226AF5FB00001FF6C /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		26889AE526AF63390001FF6C /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +65,10 @@
 		26889AB626AF4FB40001FF6C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				26889AB726AF4FB40001FF6C /* Bezier3DApp.swift */,
-				26889AB826AF4FB40001FF6C /* ContentView.swift */,
 				26889AB926AF4FB40001FF6C /* Assets.xcassets */,
+				26889ADC26AF5AF60001FF6C /* ViewController.swift */,
+				26889AE226AF5FB00001FF6C /* Renderer.swift */,
+				26889AE526AF63390001FF6C /* Shaders.metal */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -86,6 +95,8 @@
 			children = (
 				26889AC826AF4FB40001FF6C /* Info.plist */,
 				26889AC926AF4FB40001FF6C /* macOS.entitlements */,
+				26889AD826AF52150001FF6C /* Main.storyboard */,
+				26889ADF26AF5E6E0001FF6C /* AppDelegate.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -138,6 +149,7 @@
 				TargetAttributes = {
 					26889ABD26AF4FB40001FF6C = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 					26889AC526AF4FB40001FF6C = {
 						CreatedOnToolsVersion = 12.5;
@@ -177,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26889ACF26AF4FB40001FF6C /* Assets.xcassets in Resources */,
+				26889AD926AF52150001FF6C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,8 +200,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26889ACC26AF4FB40001FF6C /* ContentView.swift in Sources */,
-				26889ACA26AF4FB40001FF6C /* Bezier3DApp.swift in Sources */,
+				26889AE626AF63390001FF6C /* Shaders.metal in Sources */,
+				26889AE026AF5E6E0001FF6C /* AppDelegate.swift in Sources */,
+				26889AE326AF5FB00001FF6C /* Renderer.swift in Sources */,
+				26889ADD26AF5AF60001FF6C /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,8 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26889ACD26AF4FB40001FF6C /* ContentView.swift in Sources */,
-				26889ACB26AF4FB40001FF6C /* Bezier3DApp.swift in Sources */,
+				26889AE726AF63390001FF6C /* Shaders.metal in Sources */,
+				26889AE126AF5E6E0001FF6C /* AppDelegate.swift in Sources */,
+				26889AE426AF5FB00001FF6C /* Renderer.swift in Sources */,
+				26889ADE26AF5AF60001FF6C /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P37W7TJM3H;
 				ENABLE_PREVIEWS = YES;
@@ -332,6 +350,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = LearnMetal.Bezier3D;
 				PRODUCT_NAME = Bezier3D;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -342,6 +361,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P37W7TJM3H;
 				ENABLE_PREVIEWS = YES;
