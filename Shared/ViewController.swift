@@ -20,5 +20,6 @@ class ViewController : NSViewController {
         }
 
         renderer = Renderer(metalView: metalView)
+        addGestureRecognizers(to: metalView)
     }
 }

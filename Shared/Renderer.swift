@@ -12,6 +12,10 @@ class Renderer : NSObject {
     let commandQueue: MTLCommandQueue
     let library: MTLLibrary
     
+    var sphere: Sphere
+    var mvp: MVPMatrices = MVPMatrices()
+    let camera: ArcballCamera = ArcballCamera()
+    
     init(metalView: MTKView) {
         guard
             let device = MTLCreateSystemDefaultDevice(),
@@ -25,10 +29,12 @@ class Renderer : NSObject {
         self.commandQueue = commandQueue
         self.library = library
         
+        sphere = Sphere(device: device, library: library)
+        
         super.init()
 
         metalView.device = device
-        metalView.clearColor = MTLClearColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        metalView.clearColor = MTLClearColor(red: 0.0, green: 0.07, blue: 0.2, alpha: 1.0)
         metalView.delegate = self
         
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
@@ -37,7 +43,7 @@ class Renderer : NSObject {
 
 extension Renderer : MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        print("resize")
+        camera.sensorAspect = Float(view.bounds.width) / Float(view.bounds.height)
     }
 
     func draw(in view: MTKView) {
@@ -50,7 +56,10 @@ extension Renderer : MTKViewDelegate {
             return
         }
 
-        print("draw")
+        mvp.view = camera.viewMatrix
+        mvp.projection = camera.projectionMatrix
+
+        sphere.draw(renderEncoder: renderEncoder, mvp: &mvp)
         
         renderEncoder.endEncoding()
         guard let drawable = view.currentDrawable else {
