@@ -1,18 +1,27 @@
 //
-//  Sphere.swift
+//  Model.swift
 //  Bezier3D
 //
-//  Created by Patryk Edyko on 27/07/2021.
+//  Created by Patryk Edyko on 28/07/2021.
 //
 
-import MetalKit
 import ModelIO
+import MetalKit
 
-class Sphere : Drawable {
+class Model : Drawable {
+    let mdlMesh: MDLMesh
+    let mtkMesh: MTKMesh
+    let pipelineState: MTLRenderPipelineState
     
-    private let mdlMesh: MDLMesh
-    private let mtkMesh: MTKMesh
-    private let pipelineState: MTLRenderPipelineState
+    var drawPrimitiveType: MTLPrimitiveType = .lineStrip
+    var color: SIMD4<Float> = [1.0, 1.0, 1.0, 1.0]
+
+    var transform: MDLTransform {
+        guard let transform = mdlMesh.transform as? MDLTransform else {
+            fatalError("Missing model transformation.")
+        }
+        return transform
+    }
     
     var modelMatrix: matrix_float4x4 {
         guard let modelMatrix = mdlMesh.transform?.matrix else {
@@ -21,11 +30,12 @@ class Sphere : Drawable {
         return modelMatrix
     }
     
-    init(device: MTLDevice, library: MTLLibrary)
+    init(mdlMesh: MDLMesh, device: MTLDevice, library: MTLLibrary)
     {
-        let allocator = MTKMeshBufferAllocator(device: device)
-        mdlMesh = MDLMesh(sphereWithExtent: [1.0, 1.0, 1.0], segments: [10, 10], inwardNormals: false, geometryType: .lines, allocator: allocator)
-        mdlMesh.transform = MDLTransform()
+        self.mdlMesh = mdlMesh
+        if mdlMesh.transform == nil {
+            mdlMesh.transform = MDLTransform()
+        }
 
         do {
             mtkMesh = try MTKMesh(mesh: mdlMesh, device: device)
@@ -39,6 +49,7 @@ class Sphere : Drawable {
         pipelineDescriptor.fragmentFunction = library.makeFunction(name: "color")
         pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
         pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
 
         do {
             pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
@@ -47,16 +58,16 @@ class Sphere : Drawable {
         }
     }
     
-    func draw(renderEncoder: MTLRenderCommandEncoder, mvp: inout MVPMatrices)
-    {
+    func draw(renderEncoder: MTLRenderCommandEncoder, mvp: inout MVPMatrices) {
         mvp.model = modelMatrix
 
         renderEncoder.setVertexBytes(&mvp, length: MemoryLayout<MVPMatrices>.stride, index: 1)
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setVertexBuffer(mtkMesh.vertexBuffers[0].buffer, offset: 0, index: 0)
+        renderEncoder.setFragmentBytes(&color, length: MemoryLayout<SIMD3<Float>>.stride, index: 0)
         for submesh in mtkMesh.submeshes
         {
-            renderEncoder.drawIndexedPrimitives(type: .lineStrip,
+            renderEncoder.drawIndexedPrimitives(type: drawPrimitiveType,
                                                 indexCount: submesh.indexCount,
                                                 indexType: submesh.indexType,
                                                 indexBuffer: submesh.indexBuffer.buffer,

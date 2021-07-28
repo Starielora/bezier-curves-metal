@@ -11,8 +11,9 @@ class Renderer : NSObject {
     let device: MTLDevice
     let commandQueue: MTLCommandQueue
     let library: MTLLibrary
+    let depthStencilState: MTLDepthStencilState
     
-    var sphere: Sphere
+    var drawables: [Drawable] = []
     var mvp: MVPMatrices = MVPMatrices()
     let camera: ArcballCamera = ArcballCamera()
     
@@ -24,12 +25,22 @@ class Renderer : NSObject {
         else {
             fatalError("GPU not available.")
         }
-        
+
         self.device = device
         self.commandQueue = commandQueue
         self.library = library
         
-        sphere = Sphere(device: device, library: library)
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .less
+        descriptor.isDepthWriteEnabled = true
+        self.depthStencilState = device.makeDepthStencilState(descriptor: descriptor)!
+        metalView.depthStencilPixelFormat = .depth32Float
+        
+//        drawables.append(Sphere(device: device, library: library))
+        drawables.append(Grid(device: device, library: library))
+        drawables.append(Gizmo(device: device, library: library))
+        drawables.append(Point(device: device, library: library))
+
         
         super.init()
 
@@ -55,11 +66,16 @@ extension Renderer : MTKViewDelegate {
             print("Could not set up variables in draw function");
             return
         }
+        
+        renderEncoder.setDepthStencilState(depthStencilState)
 
         mvp.view = camera.viewMatrix
         mvp.projection = camera.projectionMatrix
 
-        sphere.draw(renderEncoder: renderEncoder, mvp: &mvp)
+//        sphere.draw(renderEncoder: renderEncoder, mvp: &mvp)
+        for drawable in drawables {
+            drawable.draw(renderEncoder: renderEncoder, mvp: &mvp)
+        }
         
         renderEncoder.endEncoding()
         guard let drawable = view.currentDrawable else {

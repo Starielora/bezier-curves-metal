@@ -24,7 +24,7 @@ vertex VertexOut vertexPosition(const VertexIn in [[stage_in]], constant MVPMatr
     return {mvp.projection * mvp.view * mvp.model * in.position};
 }
 
-fragment float4 color()
+fragment float4 color(constant float4& color)
 {
-    return {0.0, 1.0, 1.0, 1.0};
+    return color;
 }
