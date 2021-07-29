@@ -16,7 +16,11 @@ class Renderer : NSObject {
     var drawables: [Drawable] = []
     var mvp: MVPMatrices = MVPMatrices()
     let camera: ArcballCamera = ArcballCamera()
-    
+
+    let points: Points
+    var currentTime: Float = 0.00
+    var stepIncrement: Float = 0.01
+ 
     init(metalView: MTKView) {
         guard
             let device = MTLCreateSystemDefaultDevice(),
@@ -36,12 +40,15 @@ class Renderer : NSObject {
         self.depthStencilState = device.makeDepthStencilState(descriptor: descriptor)!
         metalView.depthStencilPixelFormat = .depth32Float
         
-//        drawables.append(Sphere(device: device, library: library))
+        points = Points(initial: [[1.0, 1.0, 0.0],
+                                  [4.0, 2.0, 0.0],
+                                  [6.0, 0.0, 1.0],
+                                  [3.0, -1.0, -1.0]],
+                        device: device, library: library)
         drawables.append(Grid(device: device, library: library))
         drawables.append(Gizmo(device: device, library: library))
-        drawables.append(Point(device: device, library: library))
+        drawables.append(points)
 
-        
         super.init()
 
         metalView.device = device
@@ -68,15 +75,16 @@ extension Renderer : MTKViewDelegate {
         }
         
         renderEncoder.setDepthStencilState(depthStencilState)
+        
+        points.t = 0.5*sin(currentTime - Float.pi/2) + 0.5
 
         mvp.view = camera.viewMatrix
         mvp.projection = camera.projectionMatrix
 
-//        sphere.draw(renderEncoder: renderEncoder, mvp: &mvp)
         for drawable in drawables {
             drawable.draw(renderEncoder: renderEncoder, mvp: &mvp)
         }
-        
+
         renderEncoder.endEncoding()
         guard let drawable = view.currentDrawable else {
             print("Could not set drawable")
@@ -84,5 +92,11 @@ extension Renderer : MTKViewDelegate {
         }
         commandBuffer.present(drawable)
         commandBuffer.commit()
+
+        currentTime += stepIncrement
+        if(currentTime > 2*Float.pi) {
+            currentTime = 0
+            points.path = []
+        }
     }
 }

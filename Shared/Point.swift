@@ -11,11 +11,16 @@ import MetalKit
 class Point : Model {
 
     let size: Float = 0.05
-    
+
     init(device: MTLDevice, library: MTLLibrary)
     {
         let allocator = MTKMeshBufferAllocator(device: device)
         let mdlMesh = MDLMesh(sphereWithExtent: [size, size, size], segments: [10, 10], inwardNormals: false, geometryType: .triangles, allocator: allocator)
         super.init(mdlMesh: mdlMesh, device: device, library: library)
+    }
+
+    func move(to: SIMD3<Float>)
+    {
+        transform.translation = to
     }
 }
