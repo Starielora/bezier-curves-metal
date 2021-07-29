@@ -17,6 +17,6 @@ class Grid : Model {
         
         (mdlMesh.transform as! MDLTransform).rotation = [0.0, 0.0, Float.pi/2]
         drawPrimitiveType = .line
-        color = [0.0, 1.0, 1.0, 0.0]
+        color = [0.0, 1.0, 1.0, 0.5]
     }
 }

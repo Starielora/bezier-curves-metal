@@ -40,10 +40,16 @@ class Renderer : NSObject {
         self.depthStencilState = device.makeDepthStencilState(descriptor: descriptor)!
         metalView.depthStencilPixelFormat = .depth32Float
         
-        points = Points(initial: [[1.0, 1.0, 0.0],
-                                  [4.0, 2.0, 0.0],
-                                  [6.0, 0.0, 1.0],
-                                  [3.0, -1.0, -1.0]],
+        points = Points(initial: [
+                                    [1.0, 1.0, 0.0],
+                                    [4.0, 2.0, 0.0],
+                                    [6.0, 0.0, 1.0],
+                                    [3.0, -1.0, -1.0],
+//                                    [0.0, 0.0, 0.0],
+                                    [6.0, 6.0, 6.0],
+                                    [-5.0, 3.0, 7.0],
+//                                    [-5.0, -5.0, 0.0]
+        ],
                         device: device, library: library)
         drawables.append(Grid(device: device, library: library))
         drawables.append(Gizmo(device: device, library: library))

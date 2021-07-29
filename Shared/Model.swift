@@ -13,7 +13,7 @@ class Model : Drawable {
     let mtkMesh: MTKMesh
     let pipelineState: MTLRenderPipelineState
     
-    var drawPrimitiveType: MTLPrimitiveType = .lineStrip
+    var drawPrimitiveType: MTLPrimitiveType = .triangle
     var color: SIMD4<Float> = [1.0, 1.0, 1.0, 1.0]
 
     var transform: MDLTransform {
@@ -49,6 +49,10 @@ class Model : Drawable {
         pipelineDescriptor.fragmentFunction = library.makeFunction(name: "color")
         pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
         pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        pipelineDescriptor.colorAttachments[0].isBlendingEnabled = true
+        pipelineDescriptor.colorAttachments[0].rgbBlendOperation = .add
+        pipelineDescriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
+        pipelineDescriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
 
         do {
