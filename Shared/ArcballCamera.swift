@@ -34,12 +34,20 @@ class ArcballCamera {
         transform = camera.transform as! MDLTransform
         update()
     }
-    
+
     private func positionOnSphere()
     {
-        transform.translation.x = r * sin(phi) * cos(theta)
-        transform.translation.y = r * sin(theta)
-        transform.translation.z = r * cos(phi) * cos(theta)
+        let zAxis = simd_float3(x: 0, y: 0, z: 1)
+        let elevationRotation = simd_quatf(angle: theta, axis: [-1,0,0])
+        let azimuthRotation = simd_quatf(angle: phi, axis: [0,1,0])
+
+        transform.translation = elevationRotation.act(zAxis)
+        transform.translation = azimuthRotation.act(transform.translation)
+        transform.translation *= r
+
+//        transform.translation.x = r * sin(phi) * cos(theta)
+//        transform.translation.y = r * sin(theta)
+//        transform.translation.z = r * cos(phi) * cos(theta)
     }
     
     private func moveToTarget()
